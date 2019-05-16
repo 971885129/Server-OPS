@@ -62,6 +62,18 @@
             --console pty,target_type=serial \
             --location=/var/linux/CentOS-7-x86_64-Minimal-1810.iso \
             --extra-args 'console=ttyS0,115200n8 serial'
+
+
+### kvm下挂载新虚拟硬盘
+
+* 创建虚拟硬盘
+
+        qemu-img create -f qcow2 new.img 40G
+
+
+
+
+
 ### 存在问题
 
 * 无法连接网络
