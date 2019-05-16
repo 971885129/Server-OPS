@@ -69,7 +69,42 @@
 * 创建虚拟硬盘
 
         qemu-img create -f qcow2 new.img 40G
+* 修改虚拟机配置文件
 
+        cd /etc/libvirt/qemu/
+        virsh edit kvm1 
+            <disk type='file' device='disk'>
+              <driver name='qemu' type='qcow2'/>
+              <source file='/var/linux/img/centos74.img'/>
+              <target dev='vda' bus='virtio'/>
+              <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
+            </disk>
+        在上面内容后添加：
+            <disk type='file' device='disk'>
+              <driver name='qemu' type='qcow2'/>
+              <source file='/var/linux/img/new.img'/>
+              <target dev='vdb' bus='virtio'/>
+            </disk>
+* 启动并登陆虚拟机
+
+        virsh start kvm1
+        virsh console kvm1
+* 查看是否已经添加新的硬盘
+fdisk -l
+
+        Disk /dev/vdb: 42.9 GB, 42949672960 bytes, 83886080 sectors
+        Units = sectors of 1 * 512 = 512 bytes
+        Sector size (logical/physical): 512 bytes / 512 bytes
+        I/O size (minimum/optimal): 512 bytes / 512 bytes
+* 格式化新的硬盘为ext4格式
+
+        mkfs.ext4 /dev/vdb
+* 挂载
+
+        mount /dev/vdb /media/
+* 备注
+
+        lsblk -f 可查看所有硬盘、分区、文件系统格式等
 
 
 
