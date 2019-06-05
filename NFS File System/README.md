@@ -21,5 +21,14 @@
 
 ## 备注
 * sync参数可能影响数据写入速度，大数据可设置async(待测试）
+* 先配置exports，再重新启动nfs服务
 
+## 报错
+* 查看报错原因
+
+      服务器端
+      cat /var/log/messages | grep mount
+* 根据官方Troubleshooting解决报错
+
+      http://nfs.sourceforge.net/nfs-howto/ar01s07.html
 
