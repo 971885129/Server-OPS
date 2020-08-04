@@ -25,6 +25,7 @@
 * 设置密码
 
       passwd username
+      初始密码:password_HTP_123
       
    * 用户自行设置密码，报错
    
