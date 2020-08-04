@@ -24,8 +24,9 @@
             useradd -g manage -d /home/username -m username 
 * 设置密码
 
-      passwd username
+      /bin/passwd username
       初始密码:password_HTP_123
+      /usr/lib64/yp/ypinit
       
    * 用户自行设置密码，报错
    
