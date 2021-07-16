@@ -25,7 +25,7 @@
 * 设置密码
 
       /bin/passwd username
-      初始密码:password_HTP_123
+      初始密码:password_HTP_username
       /usr/lib64/yp/ypinit
       
    * 用户自行设置密码，报错
