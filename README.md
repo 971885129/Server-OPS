@@ -1,10 +1,11 @@
-# Server-operation-and-maintenance
+#  服务器运维
 
-* 自动挂载
+设置自动挂载
 
-      修改/etc/fstab
-      /dev/sdi /media/sda auto nosuid,nodev,nofail,x-gvfs-show 0 0
-* umount 显示被占用
+    修改/etc/fstab
+    /dev/sdi /media/sda auto nosuid,nodev,nofail,x-gvfs-show 0 0
+
+umount 显示被占用
 
       #检查占用用户及进程
       fuser -mv /media/sda/
@@ -25,7 +26,7 @@
 * 设置密码
 
       /bin/passwd username
-      初始密码:password_HTP_username
+      初始密码:password_HTP_<date>
       /usr/lib64/yp/ypinit
       
    * 用户自行设置密码，报错
