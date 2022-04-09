@@ -1,8 +1,6 @@
 # 容器配置
 
 
-'https://mubu.com/app/edit/home/6U5gCFKG800'
-
 
 
 
