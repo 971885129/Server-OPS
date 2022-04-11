@@ -120,6 +120,7 @@ EPEL
 
 		package or namespace load failed for ‘utils’:
 * 直接下载r4.1容器镜像，创建容器进入R后，安装包提示缺少动态库，但该镜像又没有yum和rpm
+
 鉴于以上conda相关问题，采用centos7为基础镜像自定义容器
 
 #### 参考
