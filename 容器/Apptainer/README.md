@@ -35,6 +35,13 @@ EPEL
 	# 重新生成缓存
 	yum makecache
 
+#### yum更新
+
+	yum update -y
+
+* yum update 会升级所有包、软件和系统内核，一般仅在新装系统时使用，日常不推荐
+* yum upgrade 只升级所有包忙不升级软件和系统内核
+
 
 
 ### 创建自定义容器
