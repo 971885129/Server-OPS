@@ -25,10 +25,17 @@
 
     /bin/passwd username
     初始密码:password_HTP_<date>
-    /usr/lib64/yp/ypinit
+
+    server端用户同步所有客户端
+    make -C /var/yp
+    
     /etc/passwd 存放账户信息
     /etc/shadow  存放用户密码
     /etc/group 用户组信息
+
+修改目录属主
+
+    chown username file/
 
 修改用户所属组
 
