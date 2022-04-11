@@ -1,6 +1,6 @@
 # Apptainer
 
-[Apptainer简介]()
+[Apptainer简介](https://mubu.com/app/edit/home/6U5gCFKG800)
 
 ### yum
 
@@ -40,19 +40,97 @@ EPEL
 	yum update -y
 
 * yum update 会升级所有包、软件和系统内核，一般仅在新装系统时使用，日常不推荐
-* yum upgrade 只升级所有包忙不升级软件和系统内核
-
+* yum upgrade 只升级所有包而不升级软件和系统内核
 
 
 ### 创建自定义容器
 
-基础镜像
+#### 基础容器创建
 
 	# 创建centos7容器
 	apptainer build --sandbox centos7_R4.0_sandbox docker://centos:centos7
 
+#### 基础容器环境配置
+
+	# yum升级
+	yum update -y
+	# yum源配置
+	yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+	yum install yum-utils
+	yum-config-manager --enable "rhel-*-optional-rpms"
+	yum clean all
+	yum makecache
+	# vim安装
+	yum -y install vim
+	# less安装
+	yum -y install less
+
+	# R Python依赖
+
+	# openssl安装
+	yum install openssl openssl-devel
+	# libxml安装
+	yum install libxml2 libxml2-devel
+	# Development Tools
+	yum groupinstall "Development Tools" -y
+	# libffi bzip2安装
+	yum install libffi-devel bzip2-devel -y
+	# ncurses
+	yum install ncurses-devel -y
+
+#### 安装R
+
+	# 下载
+	curl -O https://cdn.rstudio.com/r/centos-7/pkgs/R-4.0.0-1-1.x86_64.rpm
+	# 安装
+	yum install R-4.0.0-1-1.x86_64.rpm
+	# 安装位置/opt/R/4.1.0/bin/R
+
+#### 安装Python
+
+	# 下载
+	wget https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
+	# 安装
+	tar xvf Python-3.8.0.tgz && \
+	cd Python-3.8.0/ && \
+	./configure --enable-optimizations && \
+	make altinstall
+	# pip更新
+	/usr/local/bin/python3.8 -m pip install --upgrade pip
+
+	# 基础模块安装
+	/usr/local/bin/pip3.8 install readline
+	/usr/local/bin/pip3.8 install gnureadline
+
+#### 总结
+
+* 若所在当前目录路径与容器内一致，那么运行容器时，容器内所处位置及为当前路径，可能与容器读取宿主机环境变量有关
+* 容器会默认挂载用户home目录，且运行容器的默认位置也是在home目录
 
 
+#### 问题
+
+* 尚不清楚如何修改容器启动时的默认目录
+* R4.1使用GEOquery下载数据会中断，改为使用R4.0
+* 修改容器内/etx/profile无法设置容器内环境变量，需要通过/.singularity.d/env/90-environment.sh修改
+容器内conda使用
+* 安装完conda后，无法conda init,无法使用conda activate 激活容器
+* 使用source activate 可激活容器，但无法完成软件安装，会报错找不到conda；而且使用该方法进入下载的包含R的conda容器，启动R会报错
+
+		package or namespace load failed for ‘utils’:
+* 直接下载r4.1容器镜像，创建容器进入R后，安装包提示缺少动态库，但该镜像又没有yum和rpm
+鉴于以上conda相关问题，采用centos7为基础镜像自定义容器
+
+#### 参考
+
+	# R
+	https://docs.rstudio.com/resources/install-r/#optional-install-recommended-packages
+	# Python
+	https://computingforgeeks.com/install-latest-python-on-centos-linux/
+	https://blog.csdn.net/shitou_12/article/details/119679790
+	# 其他
+	https://apptainer.org/docs/user/main/quick_start.html#quick-installation-steps
+	https://pythonspeed.com/articles/activate-conda-dockerfile/
 
 
 
