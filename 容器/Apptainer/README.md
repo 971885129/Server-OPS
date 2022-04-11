@@ -113,6 +113,7 @@ EPEL
 * 尚不清楚如何修改容器启动时的默认目录
 * R4.1使用GEOquery下载数据会中断，改为使用R4.0
 * 修改容器内/etx/profile无法设置容器内环境变量，需要通过/.singularity.d/env/90-environment.sh修改
+
 容器内conda使用
 * 安装完conda后，无法conda init,无法使用conda activate 激活容器
 * 使用source activate 可激活容器，但无法完成软件安装，会报错找不到conda；而且使用该方法进入下载的包含R的conda容器，启动R会报错
