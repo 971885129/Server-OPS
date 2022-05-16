@@ -29,6 +29,9 @@
     server端用户同步所有客户端
     make -C /var/yp
     
+    #修改密码
+    yppasswd
+    
     /etc/passwd 存放账户信息
     /etc/shadow  存放用户密码
     /etc/group 用户组信息
