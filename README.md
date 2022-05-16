@@ -24,7 +24,7 @@
 设置密码
 
     /bin/passwd username
-    初始密码:password_HTP_<date>
+    初始密码:HTP_<date>
 
     server端用户同步所有客户端
     make -C /var/yp
